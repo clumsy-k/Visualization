@@ -40,3 +40,18 @@ g <- ggplot(heightweight, aes(x = ageYear, y = heightIn, fill = weightLb)) +
     guide = guide_legend()
   )
 plot(g)
+
+# I want to fit the lines of the regression model to the scatter plot.
+g <- ggplot(heightweight, aes(x = ageYear, y = heightIn))
+
+# 99% confidence interval
+g1 <- g + geom_point() + stat_smooth(method = lm, level = 0.99)
+plot(g1)
+
+# No confidence interval
+g1 <- g + geom_point() + stat_smooth(medho = lm, se = FALSE)
+plot(g1)
+
+# Black regression models and gray dots
+g1 <- g + geom_point(colour = "grey60") + stat_smooth(method = lm, se = FALSE, colour = "black")
+plot(g1)
